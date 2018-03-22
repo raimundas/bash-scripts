@@ -1,2 +1,5 @@
-# bash-scripts
-This repository holds various useful Linux bash scripts to speed up work.
+Description
+
+How to run spam-check.sh script:
+
+bash <(curl -s https://raw.githubusercontent.com/raimundas/bash-scripts/master/spam-check.sh)
