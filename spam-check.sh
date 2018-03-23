@@ -30,9 +30,9 @@ case "$user_input" in
                 echo "==============================="
                 echo Running task [$user_input] $exim
                 echo "==============================="
-                echo "Exim mail queue: $(exim -bpc)"
-                echo -e "Exim top 10 senders:\n$(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)"
-                echo -e "Exim summary:\n$(exim -bp | exiqsumm)"
+                echo -e "Exim mail queue: $(exim -bpc)\n"
+                echo -e "Exim top 10 senders:\n$(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)\n"
+                echo -e "Exim summary:\n$(exim -bp | exiqsumm)\n"
                 # exiqgrep -i -list only mail ids
 
                 ;;
