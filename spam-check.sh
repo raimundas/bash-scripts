@@ -31,8 +31,8 @@ case "$user_input" in
                 echo Running task [$user_input] $exim
                 echo "==============================="
                 echo "Exim mail queue: $(exim -bpc)"
-                echo -e "Top 10 senders:\n\n $(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)"
-                # echo -e "Exim summary:\n $(exim -bp | exiqsumm)"
+                echo -e "Exim top 10 senders:\n$(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)"
+                echo -e "Exim summary:\n$(exim -bp | exiqsumm)"
                 # exiqgrep -i -list only mail ids
 
                 ;;
