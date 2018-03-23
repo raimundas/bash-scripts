@@ -33,22 +33,21 @@ case "$user_input" in
                 
                 ### Check exim status. 0 = not running; 1 = running;
                 exim_status=`service exim status | grep "dead\|stopped\|failed" | wc -l`
-                
                 if [ "$exim_status" != 0 ]
                 then
                         echo -e "Exim appears to be offline.\n"
                 else
                         echo -e "Exim appears to be running.\n"
                 fi
-                        ### Exim summary
-                        echo -e "Exim mail queue: $(exim -bpc)\n"
-                        echo -e "Exim top 10 senders:\n$(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)\n"
-
-                        ### Large Exim summary table:
-                        # Count  Volume  Oldest  Newest  Domain
-                        # -----  ------  ------  ------  ------
-                        echo -e "Exim summary:\n$(exim -bp | exiqsumm)\n"
-                        # exiqgrep -i -list only mail ids
+                ### Exim summary
+                echo -e "Exim mail queue: $(exim -bpc)\n"
+                echo -e "Exim top 10 senders:\n$(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)\n"
+                
+                ### Large Exim summary table. May not be useful if there are a lot of senders. [Uncomment to enable]
+                # Count  Volume  Oldest  Newest  Domain
+                # -----  ------  ------  ------  ------
+                # echo -e "Exim summary:\n$(exim -bp | exiqsumm)\n"
+                # exiqgrep -i -list only mail ids
                 
                 ;;
         2)
