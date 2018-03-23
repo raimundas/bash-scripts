@@ -36,9 +36,10 @@ case "$user_input" in
                 echo -e "Checking Exim status...\n"
                 if [ "$exim_status" != 0 ]
                 then
-                        echo -e "Exim appears to be offline.\n"
+                        echo "Exim appears to be offline."
+                        echo "Will try to check mail queue anyway..."
                 else
-                        echo -e "Exim appears to be running.\n"
+                        echo "Exim appears to be running."
                 fi
                 echo "==============================="
                 
