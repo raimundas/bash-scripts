@@ -32,6 +32,10 @@ case "$user_input" in
                 echo "==============================="
                 echo -e "Exim mail queue: $(exim -bpc)\n"
                 echo -e "Exim top 10 senders:\n$(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)\n"
+                
+                ### Large Exim summary table:
+                # Count  Volume  Oldest  Newest  Domain
+                # -----  ------  ------  ------  ------
                 echo -e "Exim summary:\n$(exim -bp | exiqsumm)\n"
                 # exiqgrep -i -list only mail ids
 
