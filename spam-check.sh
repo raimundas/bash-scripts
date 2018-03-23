@@ -29,10 +29,9 @@ case "$user_input" in
           	clear
                 echo "==============================="
                 echo Running task [$user_input] $exim
-                echo "==============================="
-                
-                ### Check exim status. 0 = not running; 1 = running;
-                exim_status=`service exim status | grep "dead\|stopped\|failed" | wc -l`
+                echo "==============================="                
+                ### Check Exim status. 0 = not running; 1 = running;
+                exim_status=`service exim status | grep "dead\|stopped\|failed\unrecognized" | wc -l`
                 echo -e "Checking Exim status...\n"
                 if [ "$exim_status" != 0 ]
                 then
@@ -41,30 +40,35 @@ case "$user_input" in
                 else
                         echo "Exim appears to be running."
                 fi
-                echo "==============================="
-                
+                echo "==============================="                
                 ### Exim summary
                 echo -e "Exim mail queue: $(exim -bpc)\n"
                 echo -e "Exim top 10 senders:\n$(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)\n"
-                
                 ### Large Exim summary table. May not be useful if there are a lot of senders. [Uncomment to enable]
                 # Count  Volume  Oldest  Newest  Domain
                 # -----  ------  ------  ------  ------
                 # echo -e "Exim summary:\n$(exim -bp | exiqsumm)\n"
-                # exiqgrep -i -list only mail ids
-                
+                # exiqgrep -i -list only mail ids               
                 ;;
         2)
           	clear
                 echo "==============================="
                 echo Running task: [$user_input] $postfix
-                echo "==============================="
-                
+                echo "==============================="                
+                ### Check Postfix status. 0 = not running; 1 = running;
+                postfix_status=`service postfix status | grep "dead\|stopped\|failed\|unrecognized" | wc -l`
+                echo -e "Checking Exim status...\n"
+                if [ "$postfix_status" != 0 ]
+                then
+                        echo "Postfix appears to be offline."
+                        echo "Will try to check mail queue anyway..."
+                else
+                        echo "Postfix appears to be running."
+                fi
+                echo "==============================="                
                 ### Postfix summary
                 echo -e "Postfix mail queue: $(mailq | grep ^[A-F0-9] | wc -l)\n"
                 echo -e "Postfix top 10 senders:\n$(mailq | grep ^[A-F0-9] | cut -c 42-80 | sort | uniq -c | sort -n | tail)\n" 
-
-
                 ;;
         3)
           	clear
@@ -96,5 +100,3 @@ case "$user_input" in
                 echo "# Error: The input must be a number between 0 and 9. "
 esac
 echo "==============================="
-
-
