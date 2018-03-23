@@ -33,12 +33,15 @@ case "$user_input" in
                 
                 ### Check exim status. 0 = not running; 1 = running;
                 exim_status=`service exim status | grep "dead\|stopped\|failed" | wc -l`
+                echo -e "Checking Exim status...\n"
                 if [ "$exim_status" != 0 ]
                 then
                         echo -e "Exim appears to be offline.\n"
                 else
                         echo -e "Exim appears to be running.\n"
                 fi
+                echo "==============================="
+                
                 ### Exim summary
                 echo -e "Exim mail queue: $(exim -bpc)\n"
                 echo -e "Exim top 10 senders:\n$(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)\n"
