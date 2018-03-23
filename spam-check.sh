@@ -30,8 +30,8 @@ case "$user_input" in
                 echo "==============================="
                 echo Running task [$user_input] $exim
                 echo "==============================="                
-                ### Check Exim status. 0 = not running; 1 = running;
-                exim_status=`service exim status | grep "dead\|stopped\|failed\unrecognized" | wc -l`
+                ### Check Exim status. 0 = running; 1 = stopped;
+                exim_status=`service exim status &> /tmp/spam-check.tmp; grep "dead\|stopped\|failed\unrecognized" /tmp/spam-check.tmp | wc -l`
                 echo -e "Checking Exim status...\n"
                 if [ "$exim_status" != 0 ]
                 then
@@ -55,8 +55,8 @@ case "$user_input" in
                 echo "==============================="
                 echo Running task: [$user_input] $postfix
                 echo "==============================="                
-                ### Check Postfix status. 0 = not running; 1 = running;
-                postfix_status=`service postfix status | grep "dead\|stopped\|failed\|unrecognized" | wc -l`
+                ### Check Postfix status. 0 = running; 1 = stopped;
+                postfix_status=`service postfix status &> /tmp/spam-check.tmp; grep "dead\|stopped\|failed\|unrecognized" /tmp/spam-check.tmp | wc -l`
                 echo -e "Checking Postfix status...\n"
                 if [ "$postfix_status" != 0 ]
                 then
@@ -75,11 +75,21 @@ case "$user_input" in
                 echo "==============================="
                 echo Running task: [$user_input] $pmta
                 echo "==============================="
-                
+                ### Check Pmta status. 0 = running; 1 = stopped;                
+                pmta_status=`service pmta status &> /tmp/spam-check.tmp; grep "dead\|stopped\|failed\|unrecognized" /tmp/spam-check.tmp | wc -l`
+                echo -e "Checking Pmta status...\n"
+                if [ "$pmta_status" != 0 ]
+                then
+                        echo "Pmta appears to be offline."
+                        echo "Will try to check mail queue anyway..."
+                else
+                        echo "Pmta appears to be running."
+                fi
+                echo "==============================="
                 ### Pmta summary
                 # testing
                 ### Show mail queue
-                # pmta show queue
+                pmta show queue
                 # pmta show topqueues
                 
                 ###  Show domains to which mails are being sent
