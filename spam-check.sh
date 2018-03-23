@@ -57,7 +57,7 @@ case "$user_input" in
                 echo "==============================="                
                 ### Check Postfix status. 0 = not running; 1 = running;
                 postfix_status=`service postfix status | grep "dead\|stopped\|failed\|unrecognized" | wc -l`
-                echo -e "Checking Exim status...\n"
+                echo -e "Checking Postfix status...\n"
                 if [ "$postfix_status" != 0 ]
                 then
                         echo "Postfix appears to be offline."
