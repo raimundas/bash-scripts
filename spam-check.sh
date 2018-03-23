@@ -31,7 +31,7 @@ case "$user_input" in
                 echo Running task [$user_input] $exim
                 echo "==============================="
                 echo "Exim mail queue: $(exim -bpc)"
-                echo "Top 10 senders: $(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)"
+                echo -e "Top 10 senders:\n $(exim -bpr | grep '<' | sed '/<>/d' | cut -d'<' -f2 | cut -d'>' -f1 | sort -n | uniq -c | sort -n | tail)"
                 # echo -e "Exim summary:\n $(exim -bp | exiqsumm)"
                 # exiqgrep -i -list only mail ids
 
@@ -50,9 +50,23 @@ case "$user_input" in
                 echo "==============================="
                 echo Running task: [$user_input] $pmta
                 echo "==============================="
-
-
-
+                
+                # testing
+                ### Show mail queue
+                # pmta show queue
+                # pmta show topqueues
+                
+                ###  Show domains to which mails are being sent
+                # pmta show domains
+                # pmta show topdomains
+                
+                ### Show status of Traffic, Connections and Queues
+                # pmta show status
+                
+                ### Show jobs
+                # pmta show jobs
+                
+                
                 ;;
         *)
           	clear
