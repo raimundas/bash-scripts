@@ -24,6 +24,7 @@ case "$user_input" in
           	clear
                 echo "==============================="
                 echo Exiting...
+                echo "==============================="
                 ;;
         1)
           	clear
@@ -48,7 +49,8 @@ case "$user_input" in
                 # Count  Volume  Oldest  Newest  Domain
                 # -----  ------  ------  ------  ------
                 # echo -e "Exim summary:\n$(exim -bp | exiqsumm)\n"
-                # exiqgrep -i -list only mail ids               
+                # exiqgrep -i -list only mail ids
+                echo "==============================="
                 ;;
         2)
           	clear
@@ -69,6 +71,7 @@ case "$user_input" in
                 ### Postfix summary
                 echo -e "Postfix mail queue: $(mailq | grep ^[A-F0-9] | wc -l)\n"
                 echo -e "Postfix top 10 senders:\n$(mailq | grep ^[A-F0-9] | cut -c 42-80 | sort | uniq -c | sort -n | tail)\n" 
+                echo "==============================="
                 ;;
         3)
           	clear
@@ -102,19 +105,25 @@ case "$user_input" in
                 ### Show jobs
                 # pmta show jobs
                 
-                
+                echo "==============================="
                 ;;
         *)
           	clear
                 echo "==============================="
                 echo "# Error: The input must be a number between 0 and 9. "
-esac
-        echo "==============================="        
+                echo "==============================="
+                ;;
+esac       
         if [ ! -f "/tmp/spam-check.tmp" ]
         then
+                echo "==============================="
                 echo "Cleaning up temporary files: Nothing to do."
+                echo "==============================="
         else
+                echo "==============================="
                 echo "Cleaning up temporary files: /tmp/spam-check.tmp"
                 echo $(rm /tmp/spam-check.tmp -f)
+                echo "==============================="
         fi
-echo "==============================="
+        
+        
