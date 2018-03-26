@@ -116,13 +116,12 @@ case "$user_input" in
 esac       
         if [ ! -f "/tmp/spam-check.tmp" ]
         then
-                echo "==============================="
                 echo "Cleaning up temporary files: Nothing to do."
                 echo "==============================="
         else
-                echo "==============================="
                 echo "Cleaning up temporary files: /tmp/spam-check.tmp"
                 echo $(rm /tmp/spam-check.tmp -f)
+                echo "Done."
                 echo "==============================="
         fi
         
