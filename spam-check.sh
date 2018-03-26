@@ -109,4 +109,11 @@ case "$user_input" in
                 echo "==============================="
                 echo "# Error: The input must be a number between 0 and 9. "
 esac
+        if [ ! -f "/tmp/spam-check.tmp" ]
+        then
+                echo "Cleaning up temporary files: Nothing to do."
+        else
+                echo "Cleaning up temporary files: /tmp/spam-check.tmp"
+                echo $(rm /tmp/spam-check.tmp -f)
+        fi
 echo "==============================="
