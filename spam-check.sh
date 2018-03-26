@@ -48,7 +48,7 @@ case "$user_input" in
                 ### Large Exim summary table. May not be useful if there are a lot of senders. [Uncomment to enable]
                 # Count  Volume  Oldest  Newest  Domain
                 # -----  ------  ------  ------  ------
-                # echo -e "Exim summary:\n$(exim -bp | exiqsumm)\n"
+                echo -e "Exim summary:\n$(exim -bp | exiqsumm)\n"
                 # exiqgrep -i -list only mail ids
                 echo "==============================="
                 ;;
