@@ -92,19 +92,20 @@ case "$user_input" in
                 ### Pmta summary
                 # testing
                 ### Show mail queue
-                pmta show queue
+                # pmta show queue
                 # pmta show topqueues
                 
                 ###  Show domains to which mails are being sent
                 # pmta show domains
                 # pmta show topdomains
                 
-                ### Show status of Traffic, Connections and Queues
-                # pmta show status
-                
                 ### Show jobs
-                # pmta show jobs
+                pmta show jobs
+                echo ""
+                echo ""
                 
+                ### Show status of Traffic, Connections and Queues
+                pmta show status
                 echo "==============================="
                 ;;
         *)
